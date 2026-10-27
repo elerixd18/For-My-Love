@@ -1,0 +1,708 @@
+:root {
+    --pink: #ff8fab;
+    --light-pink: #ffd6e0;
+    --soft-pink: #fff0f5;
+    --purple: #cdb4db;
+    --text: #795565;
+    --dark-pink: #c96f91;
+    --white: #fffdfd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(
+        135deg,
+        #fff0f5 0%,
+        #ffe4ec 35%,
+        #f9e5ff 70%,
+        #fff0f5 100%
+    );
+
+    color: var(--text);
+    font-family: "Nunito", sans-serif;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 35px 18px;
+}
+
+/* Fondo animado */
+
+.background-glow {
+    position: fixed;
+    width: 550px;
+    height: 550px;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: radial-gradient(
+        circle,
+        rgba(255, 182, 203, 0.38),
+        rgba(205, 180, 219, 0.12) 50%,
+        transparent 72%
+    );
+
+    border-radius: 50%;
+    animation: glow 7s ease-in-out infinite alternate;
+
+    pointer-events: none;
+}
+
+@keyframes glow {
+    from {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 0.65;
+    }
+
+    to {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Contenedor principal */
+
+.container {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 680px;
+
+    text-align: center;
+
+    animation: appear 1.2s ease both;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Decoración superior */
+
+.top-decoration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+
+    color: var(--pink);
+    font-size: 25px;
+
+    margin-bottom: 30px;
+}
+
+.tiny-star {
+    font-size: 17px;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Bienvenida */
+
+.eyebrow {
+    color: var(--dark-pink);
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 4px;
+
+    margin-bottom: 23px;
+}
+
+h1,
+h2 {
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+}
+
+h1 {
+    font-size: clamp(32px, 7vw, 53px);
+    line-height: 1.25;
+    color: #765263;
+}
+
+h1 span {
+    display: block;
+
+    color: var(--dark-pink);
+    font-style: italic;
+}
+
+.intro {
+    max-width: 370px;
+
+    margin: 20px auto 0;
+
+    font-size: 14px;
+    line-height: 1.9;
+
+    color: #997b8a;
+}
+
+/* Sobre */
+
+.envelope-wrapper {
+    position: relative;
+
+    width: 190px;
+    height: 145px;
+
+    margin: 62px auto 28px;
+
+    cursor: pointer;
+    perspective: 900px;
+
+    animation: envelopeFloat 3s ease-in-out infinite;
+}
+
+@keyframes envelopeFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.envelope {
+    position: absolute;
+    inset: 0;
+
+    filter: drop-shadow(0 15px 18px rgba(201, 111, 145, 0.17));
+
+    transition: filter 0.4s;
+}
+
+.envelope-wrapper:hover .envelope {
+    filter: drop-shadow(0 20px 25px rgba(201, 111, 145, 0.28));
+}
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+
+    background: #ffb6c9;
+    border-radius: 9px;
+
+    z-index: 1;
+}
+
+.letter-preview {
+    position: absolute;
+
+    width: 86%;
+    height: 115px;
+
+    left: 7%;
+    bottom: 9px;
+
+    background: #fffdfd;
+    border-radius: 5px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    padding-top: 22px;
+
+    color: #cf829c;
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+
+    z-index: 2;
+
+    transition: transform 0.9s ease;
+}
+
+.envelope-front {
+    position: absolute;
+    inset: 0;
+
+    background: #ffc7d6;
+
+    clip-path: polygon(
+        0 100%,
+        0 0,
+        50% 58%,
+        100% 0,
+        100% 100%
+    );
+
+    border-radius: 0 0 9px 9px;
+
+    z-index: 4;
+}
+
+.envelope-flap {
+    position: absolute;
+    inset: 0;
+
+    background: #ff9fba;
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 65%
+    );
+
+    transform-origin: top center;
+
+    transition: transform 0.8s ease;
+
+    z-index: 5;
+}
+
+.envelope-seal {
+    position: absolute;
+
+    top: 59px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 31px;
+    height: 31px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff0f5;
+    color: #d96d93;
+
+    font-size: 16px;
+
+    z-index: 6;
+
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+/* Apertura de la carta */
+
+.envelope-wrapper.opened {
+    animation: none;
+    cursor: default;
+}
+
+.envelope-wrapper.opened .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope-wrapper.opened .envelope-seal {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.3);
+}
+
+.envelope-wrapper.opened .letter-preview {
+    transform: translateY(-100px);
+}
+
+/* Estrellitas alrededor del sobre */
+
+.envelope-sparkle {
+    position: absolute;
+
+    color: #d78eac;
+    font-size: 23px;
+
+    animation: sparkleFloat 2.5s ease-in-out infinite alternate;
+}
+
+.sparkle-one {
+    top: -22px;
+    left: -20px;
+}
+
+.sparkle-two {
+    top: 5px;
+    right: -22px;
+
+    animation-delay: 0.5s;
+}
+
+.sparkle-three {
+    bottom: -8px;
+    right: 2px;
+
+    animation-delay: 1s;
+}
+
+@keyframes sparkleFloat {
+    from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.5;
+    }
+
+    to {
+        transform: translateY(-10px) rotate(15deg);
+        opacity: 1;
+    }
+}
+
+.tap-hint {
+    color: #b57d94;
+
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    animation: hintPulse 2s infinite;
+}
+
+@keyframes hintPulse {
+    50% {
+        opacity: 0.55;
+    }
+}
+
+.small-note {
+    margin-top: 50px;
+
+    color: #c09aaa;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+/* Corazones flotantes */
+
+.floating-hearts {
+    position: fixed;
+    inset: 0;
+
+    overflow: hidden;
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+.heart-particle {
+    position: absolute;
+    bottom: -50px;
+
+    color: #f4a3bd;
+
+    opacity: 0;
+
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.7);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.65;
+    }
+
+    85% {
+        opacity: 0.55;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(35deg) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* Carta romántica */
+
+.love-letter {
+    display: none;
+
+    width: 100%;
+
+    margin-top: 45px;
+
+    background: rgba(255, 253, 253, 0.82);
+
+    border: 1px solid rgba(255, 182, 203, 0.7);
+    border-radius: 18px;
+
+    box-shadow:
+        0 20px 65px rgba(201, 111, 145, 0.12),
+        inset 0 0 35px rgba(255, 214, 224, 0.18);
+
+    overflow: hidden;
+}
+
+.love-letter.visible {
+    display: block;
+    animation: letterAppear 1s ease both;
+}
+
+@keyframes letterAppear {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.letter-top,
+.letter-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 19px 25px;
+
+    color: #c98ca4;
+
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.letter-top {
+    border-bottom: 1px solid #f9dce6;
+}
+
+.letter-footer {
+    justify-content: center;
+
+    border-top: 1px solid #f9dce6;
+
+    font-size: 8px;
+}
+
+.letter-content {
+    padding: 40px 35px;
+}
+
+.big-heart {
+    color: #f18cab;
+
+    font-size: 38px;
+
+    margin-bottom: 23px;
+
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.2);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.12);
+    }
+}
+
+.letter-greeting {
+    font-size: 12px;
+    color: #bc879d;
+
+    margin-bottom: 18px;
+}
+
+h2 {
+    font-size: clamp(27px, 5vw, 39px);
+    line-height: 1.4;
+
+    color: #795565;
+}
+
+h2 span {
+    display: block;
+
+    color: #d77f9f;
+    font-style: italic;
+}
+
+.letter-divider {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+    margin: 27px 0;
+
+    color: #e6a1b9;
+}
+
+.letter-text {
+    min-height: 100px;
+
+    max-width: 450px;
+
+    margin: 0 auto;
+
+    color: #967586;
+
+    font-size: 14px;
+    line-height: 2.1;
+
+    white-space: pre-line;
+}
+
+.forever {
+    margin-top: 30px;
+
+    color: #d17b9b;
+
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-size: 19px;
+}
+
+.signature {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    align-items: center;
+
+    margin-top: 35px;
+
+    color: #b38a9c;
+    font-size: 12px;
+}
+
+.signature strong {
+    color: #cd7897;
+
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+    font-style: italic;
+}
+
+/* Botón */
+
+.restart-button {
+    margin: 0 0 28px;
+
+    padding: 12px 22px;
+
+    border: 1px solid #efc1d1;
+    border-radius: 30px;
+
+    background: #fff0f5;
+
+    color: #bd7895;
+
+    font-family: "Nunito", sans-serif;
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition: all 0.3s;
+}
+
+.restart-button:hover {
+    background: #ffdce8;
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(201, 111, 145, 0.12);
+}
+
+/* Pie */
+
+footer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+    margin-top: 55px;
+
+    color: #c09aaa;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+/* Celulares */
+
+@media (max-width: 500px) {
+    body {
+        padding: 28px 16px;
+    }
+
+    .top-decoration {
+        margin-bottom: 24px;
+    }
+
+    .envelope-wrapper {
+        margin-top: 50px;
+    }
+
+    .small-note {
+        margin-top: 40px;
+    }
+
+    .letter-content {
+        padding: 32px 20px;
+    }
+
+    .letter-top,
+    .letter-footer {
+        padding: 16px 13px;
+        font-size: 8px;
+    }
+
+    .letter-text {
+        font-size: 13px;
+        line-height: 2;
+    }
+
+    footer {
+        margin-top: 40px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
